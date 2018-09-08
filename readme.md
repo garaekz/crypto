@@ -14,7 +14,7 @@ El API endpoint será la ruta base donde corras la aplicación más `/api/precio
 ### Parámetros
 Los parámetros se dividen en dos tipos, necesarios y opcionales. A continuación la lista de parámetros con su descripción.
 
-##### Necesesarios
+##### Necesarios
 
  - amount
 	 - Este parámetro debe ser un número entero, no se aceptan negativos ni strings.

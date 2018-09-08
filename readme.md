@@ -1,65 +1,155 @@
-<p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+# Crypto API
+Un proyecto de conversión de criptomonedas consumiendo el API de Cryptocompare
 
-## About Laravel
+## Instalación
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Sigue los pasos comunes para poner en marcha una aplicación en Laravel 5
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications.
 
-## Learning Laravel
+## Uso
+El API endpoint será la ruta base donde corras la aplicación más `/api/precio`
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of any modern web application framework, making it a breeze to get started learning the framework.
+### Parámetros
+Los parámetros se dividen en dos tipos, necesarios y opcionales. A continuación la lista de parámetros con su descripción.
 
-If you're not in the mood to read, [Laracasts](https://laracasts.com) contains over 1100 video tutorials on a range of topics including Laravel, modern PHP, unit testing, JavaScript, and more. Boost the skill level of yourself and your entire team by digging into our comprehensive video library.
+##### Necesesarios
 
-## Laravel Sponsors
+ - amount
+	 - Este parámetro debe ser un número entero, no se aceptan negativos ni strings.
+ - currency
+	 - Debe ser en el formato de Abreviatura de divisa utilizado comunmente (**ISO** 4217).
+ - crypto
+	 - Debe ser las siglas utilizadas universalmente para las criptomonedas
+	 - 
+Todos los anteriores pueden ser múltiples valores separados por coma.
 
-We would like to extend our thanks to the following sponsors for helping fund on-going Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell):
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- [UserInsights](https://userinsights.com)
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
-- [Invoice Ninja](https://www.invoiceninja.com)
-- [iMi digital](https://www.imi-digital.de/)
-- [Earthlink](https://www.earthlink.ro/)
-- [Steadfast Collective](https://steadfastcollective.com/)
+##### Opcionales
 
-## Contributing
+ - format
+	 - Solo acepta un valor, `text`, este retornará la información en texto, de no contar con dicho parámetro se retornará en formato `JSON`.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Todos los parámetros se introducirán como parámetro de URL común.
 
-## Security Vulnerabilities
+### Ejemplos
+En la barra de direcciones: `http://sitio.local/api/precio?amount=55212311,15151,32323,8988&currency=MXN,EUR&crypto=BTC,DASH,ETH`
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Resultado:
+```json
+{  
+	"MXN":[  
+	{  
+		"cantidad":"55212311",  
+		"conversion":{  
+			"BTC":"451.3765427279",  
+			"DASH":"14,655.0879241928",  
+			"ETH":"13,965.8497285867"  
+		}  
+	},  
+	{  
+		"cantidad":"15151",  
+		"conversion":{  
+			"BTC":"0.1238637883",  
+			"DASH":"4.0215530399",  
+			"ETH":"3.8324168180"  
+		}  
+	},  
+	{  
+		"cantidad":"32323",  
+		"conversion":{  
+			"BTC":"0.2642498335",  
+			"DASH":"8.5795431923",  
+			"ETH":"8.1760417668"  
+		}  
+	},  
+	{  
+		"cantidad":"8988",  
+		"conversion":{  
+			"BTC":"0.0734794884",  
+			"DASH":"2.3856985494",  
+			"ETH":"2.2734976147"  
+		}  
+	}  
+	],  
+	"EUR":[  
+	{  
+		"cantidad":"55212311",  
+		"conversion":{  
+			"BTC":"10,288.4619756523",  
+			"DASH":"334,620.0666666667",  
+			"ETH":"320,349.9332753119"  
+		}  
+	},  
+	{  
+	"cantidad":"15151",  
+	"conversion":{  
+			"BTC":"2.8232922073",  
+			"DASH":"91.8242424242",  
+			"ETH":"87.9083260806"  
+		}  
+	},  
+	{  
+	"cantidad":"32323",  
+		"conversion":{  
+			"BTC":"6.0231848734",  
+			"DASH":"195.8969696970",  
+			"ETH":"187.5427908326"  
+		}  
+	},  
+	{  
+	"cantidad":"8988",  
+	"conversion":{  
+			"BTC":"1.6748564688",  
+			"DASH":"54.4727272727",  
+			"ETH":"52.1496953873"  
+		}  
+	}  
+	]  
+}
+```
+
+En caso de agregarle el parámetro `format` con valor `text` (`&format=text`)mostrará el resultado en distinto formato, ejemplo:
+En la barra de direcciones: `http://sitio.local/api/precio?amount=55212311,15151,32323,8988&currency=MXN,EUR&crypto=BTC,DASH,ETH&format=text`
+
+Resultado:
+
+```bash
+55212311 MXN = 453.3030459770 BTC  
+55212311 EUR = 10,307.1693527160 BTC  
+55212311 MXN = 14,911.2844071385 DASH  
+55212311 EUR = 340,837.7739366628 DASH  
+55212311 MXN = 14,104.0223263893 ETH  
+55212311 EUR = 323,844.8648014546 ETH  
+  
+15151 MXN = 0.1243924466 BTC  
+15151 EUR = 2.8284257629 BTC  
+15151 MXN = 4.0918567972 DASH  
+15151 EUR = 93.5304648435 DASH  
+15151 MXN = 3.8703332354 ETH  
+15151 EUR = 88.8673822512 ETH  
+  
+32323 MXN = 0.2653776683 BTC  
+32323 EUR = 6.0341367524 BTC  
+32323 MXN = 8.7295285628 DASH  
+32323 EUR = 199.5370084573 DASH  
+32323 MXN = 8.2569322928 ETH  
+32323 EUR = 189.5888321896 ETH  
+  
+8988 MXN = 0.0737931034 BTC  
+8988 EUR = 1.6779018386 BTC  
+8988 MXN = 2.4274047187 DASH  
+8988 EUR = 55.4849064757 DASH  
+8988 MXN = 2.2959907016 ETH  
+8988 EUR = 52.7186345240 ETH
+```
+
+## Autor
+
+* **David Garay** - *Contribuyente único* - [Garaekz](https://github.com/garaekz/)
+
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
